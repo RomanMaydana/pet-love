@@ -1,9 +1,14 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-green-pet: #16ec12;
+}
+
 :root {
   font-family: 'Onest Variable', sans-serif;
-  color-scheme: dark light;
+  color-scheme: light dark ;
 
   line-height: 1.5;
   font-weight: 400;
