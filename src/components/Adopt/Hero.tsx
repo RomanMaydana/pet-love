@@ -1,5 +1,5 @@
 import { SearchIcon } from '../../icons/SearchIcon'
-import { Button } from '../Button'
+import { GreenButton } from '../GreenButton'
 
 export function Hero () {
   return (
@@ -12,7 +12,7 @@ export function Hero () {
         <div className='flex items-center gap-2 bg-white p-2 rounded-lg '>
           <SearchIcon className='mx-2 w-6 h-6 text-lime-600' />
           <input type="text" name='text' className='flex-1 placeholder:text-neutral-400 focus:outline-none' placeholder='Search by name, race or color' />
-          <Button type='submit' onClick={() => console.log('search')}>Search</Button>
+          <GreenButton type='submit' onClick={() => console.log('search')}>Search</GreenButton>
         </div>
       </section>
     </section>
