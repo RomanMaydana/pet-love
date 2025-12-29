@@ -2,7 +2,7 @@
   {
     "id": "PET-001",
     "name": "Max",
-    "species": "Dog",
+    "species": "dog",
     "breed": "Golden Retriever",
     "age": 2,
     "age_unit": "years",
@@ -28,7 +28,7 @@
   {
     "id": "PET-002",
     "name": "Thumper",
-    "species": "Rabbit",
+    "species": "rabbit",
     "breed": "Holland Lop",
     "age": 8,
     "age_unit": "months",
@@ -54,7 +54,7 @@
   {
     "id": "PET-003",
     "name": "Oliver",
-    "species": "Cat",
+    "species": "cat",
     "breed": "Maine Coon",
     "age": 4,
     "age_unit": "years",
@@ -79,7 +79,7 @@
   {
     "id": "PET-004",
     "name": "Pip",
-    "species": "Bird",
+    "species": "bird",
     "breed": "Budgie",
     "age": 1,
     "age_unit": "years",
@@ -104,7 +104,7 @@
   {
     "id": "PET-005",
     "name": "Gizmo",
-    "species": "Guinea Pig",
+    "species": "other",
     "breed": "Abyssinian",
     "age": 6,
     "age_unit": "months",
@@ -129,7 +129,7 @@
   {
     "id": "PET-006",
     "name": "Luna",
-    "species": "Dog",
+    "species": "dog",
     "breed": "Husky Mix",
     "age": 3,
     "age_unit": "years",
@@ -154,7 +154,7 @@
   {
     "id": "PET-007",
     "name": "Nibbles",
-    "species": "Hamster",
+    "species": "other",
     "breed": "Syrian",
     "age": 4,
     "age_unit": "months",
@@ -179,7 +179,7 @@
   {
     "id": "PET-008",
     "name": "Shadow",
-    "species": "Cat",
+    "species": "cat",
     "breed": "Black Domestic",
     "age": 5,
     "age_unit": "years",
@@ -204,7 +204,7 @@
   {
     "id": "PET-009",
     "name": "Duke",
-    "species": "Dog",
+    "species": "dog",
     "breed": "Boxer",
     "age": 6,
     "age_unit": "years",
@@ -229,7 +229,7 @@
   {
     "id": "PET-010",
     "name": "Sunny",
-    "species": "Bird",
+    "species": "bird",
     "breed": "Cockatiel",
     "age": 2,
     "age_unit": "years",
@@ -254,7 +254,7 @@
   {
     "id": "PET-011",
     "name": "Rex",
-    "species": "Dog",
+    "species": "dog",
     "breed": "German Shepherd",
     "age": 4,
     "age_unit": "years",
@@ -279,7 +279,7 @@
   {
     "id": "PET-012",
     "name": "Snowball",
-    "species": "Rabbit",
+    "species": "rabbit",
     "breed": "Angora",
     "age": 1,
     "age_unit": "years",
@@ -304,7 +304,7 @@
   {
     "id": "PET-013",
     "name": "Mittens",
-    "species": "Cat",
+    "species": "cat",
     "breed": "Calico",
     "age": 2,
     "age_unit": "years",
@@ -329,7 +329,7 @@
   {
     "id": "PET-014",
     "name": "Peanut",
-    "species": "Guinea Pig",
+    "species": "other",
     "breed": "American",
     "age": 10,
     "age_unit": "months",
@@ -354,7 +354,7 @@
   {
     "id": "PET-015",
     "name": "Toby",
-    "species": "Dog",
+    "species": "dog",
     "breed": "Beagle",
     "age": 5,
     "age_unit": "months",
@@ -379,7 +379,7 @@
   {
     "id": "PET-016",
     "name": "Whiskers",
-    "species": "Cat",
+    "species": "cat",
     "breed": "Siamese",
     "age": 3,
     "age_unit": "years",
@@ -404,7 +404,7 @@
   {
     "id": "PET-017",
     "name": "Sky",
-    "species": "Bird",
+    "species": "bird",
     "breed": "Parakeet",
     "age": 1,
     "age_unit": "years",
@@ -429,7 +429,7 @@
   {
     "id": "PET-018",
     "name": "Buster",
-    "species": "Dog",
+    "species": "dog",
     "breed": "Bulldog Mix",
     "age": 7,
     "age_unit": "years",
@@ -454,7 +454,7 @@
   {
     "id": "PET-019",
     "name": "Cleo",
-    "species": "Cat",
+    "species": "cat",
     "breed": "Russian Blue",
     "age": 2,
     "age_unit": "years",
@@ -479,7 +479,7 @@
   {
     "id": "PET-020",
     "name": "Zippy",
-    "species": "Hamster",
+    "species": "other",
     "breed": "Roborovski",
     "age": 2,
     "age_unit": "months",

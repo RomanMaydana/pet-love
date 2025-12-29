@@ -1,3 +1,45 @@
+declare global {
+  interface Array<T> {
+    toSorted (comparator?: (a: T, b: T) => number): T[]
+  }
+}
+export interface Filters {
+  species: string[]
+  age?: number
+  gender?: string,
+  sortBy: string,
+}
+
+export const PetAges: { [key: number]: number[] } = {
+  0: [0, 1],
+  1: [2, 3],
+  2: [4, 7],
+  3: [8, 12],
+  4: [12, 99],
+}
+
+export enum QuickActions {
+  ALL = 'all',
+  URGENT = 'urgent',
+  VACCINATED = 'vaccinated',
+}
+export enum SortBy {
+  LATEST = 'latest',
+  OLDEST = 'oldest',
+}
+export const Species = {
+  dog: 'Dog',
+  cat: 'Cat',
+  rabbit: 'Rabbit',
+  bird: 'Bird',
+  other: 'Other',
+}
+export const Ages = {
+  puppy: 'Puppy (0-1 year)',
+  teen: 'Teen (1-3 years)',
+  adult: 'Adult (3-8 years)',
+  senior: 'Senior (8+ years)',
+}
 export interface Pets {
   pets_for_adoption: Pet[];
 }
