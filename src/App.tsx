@@ -16,7 +16,11 @@ function App () {
   const [quickActions, setQuickActions] = useState<QuickActionsType>(QuickActionsType.ALL)
   const [currentPage, setCurrentPage] = useState<number>(1)
 
-  const { handleChange } = useSearchForm({ onChange: setFilters, filters })
+  const onChange = (filters: FiltersType) => {
+    setFilters(filters)
+    setCurrentPage(1)
+  }
+  const { handleChange } = useSearchForm({ onChange, filters })
 
   useEffect(() => {
     function fetchPets () {
@@ -74,7 +78,7 @@ function App () {
     <div className='text-[#0d1b0d]'>
       <Header />
       <main>
-        <form role='search' onSubmit={handleChange} >
+        <form role='search' onChange={handleChange} >
           <Hero />
           <div className='flex flex-col md:flex-row gap-8 p-8 w-full mx-auto '>
             <aside className='w-full md:w-1/4 2xl:w-1/5'>
