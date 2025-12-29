@@ -2,21 +2,18 @@ import './App.css'
 import { Hero } from './components/Adopt/Hero'
 import { Header } from './components/Header'
 import { useEffect, useState } from 'react'
-import { AgeUnit, type Filters as FiltersType, type Pet, PetAges, QuickActions as QuickActionsType, SortBy } from '@/types.d'
+import { AgeUnit, type Filters as FiltersType, initialState, type Pet, PetAges, QuickActions as QuickActionsType, SortBy } from '@/types.d'
 import { PetList } from '@/components/Adopt/PetList'
 import { QuickActions } from './components/Adopt/QuickActions'
 import { Filters } from './components/Adopt/Filters'
+import { useSearchForm } from './hooks/useSearchForm'
 
-const initialState: FiltersType = {
-  species: [],
-  age: undefined,
-  gender: undefined,
-  sortBy: SortBy.LATEST,
-}
 function App () {
   const [pets, setPets] = useState<Pet[]>([])
   const [filters, setFilters] = useState<FiltersType>(initialState)
   const [quickActions, setQuickActions] = useState<QuickActionsType>(QuickActionsType.ALL)
+
+  const { handleChange } = useSearchForm({ onChange: setFilters, filters })
 
   useEffect(() => {
     function fetchPets () {
@@ -25,6 +22,9 @@ function App () {
         .then((data: Pet[]) => {
           const filteredPets = data.filter((pet: Pet) => {
             let result = true
+            if(filters.text.length > 0 && !pet.name.toLowerCase().includes(filters.text.toLowerCase())) {
+              result = false
+            }
             if (filters.species.length > 0 && !filters.species.includes(pet.species)) {
               result = false
             }
@@ -53,23 +53,6 @@ function App () {
 
   }, [filters, quickActions])
 
-  const handleFiltersChange = (event: React.FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(event.currentTarget)
-    const species = formData.getAll('species')
-    const age = formData.get('age')
-    const gender = formData.get('gender')
-    const sortBy = formData.get('sort')
-    handleSearch({
-      ...filters,
-      sortBy: sortBy as string,
-      species: species as string[],
-      age: age ? Number(age) : undefined,
-      gender: gender as string })
-  }
-  const handleSearch = (filters: FiltersType) => {
-    setFilters(filters)
-  }
-
   const handleQuickActionsChange = (quickActions: QuickActionsType) => {
     setQuickActions(quickActions)
   }
@@ -83,7 +66,7 @@ function App () {
     <div className='text-[#0d1b0d]'>
       <Header />
       <main>
-        <form role='search' onChange={handleFiltersChange} >
+        <form role='search' onChange={handleChange} >
           <Hero />
           <div className='flex flex-col md:flex-row gap-8 p-8 w-full mx-auto '>
             <aside className='w-full md:w-1/4 2xl:w-1/5'>

@@ -8,8 +8,15 @@ export interface Filters {
   age?: number
   gender?: string,
   sortBy: string,
+  text: string,
 }
-
+export const initialState: FiltersType = {
+  species: [],
+  age: undefined,
+  gender: undefined,
+  sortBy: SortBy.LATEST,
+  text: '',
+}
 export const PetAges: { [key: number]: number[] } = {
   0: [0, 1],
   1: [2, 3],
