@@ -1,13 +1,38 @@
 import { initialState, type Pet, type Filters as FiltersType, QuickActions as QuickActionsType, SortBy, AgeUnit, PetAges } from '@/types.d'
 import { useSearchForm } from '@/hooks/useSearchForm'
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router'
 
 export const RESULTS_PER_PAGE = 6
 export const useFilters = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [pets, setPets] = useState<Pet[]>([])
-  const [filters, setFilters] = useState<FiltersType>(initialState)
-  const [quickActions, setQuickActions] = useState<QuickActionsType>(QuickActionsType.ALL)
-  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [filters, setFilters] = useState<FiltersType>(() => {
+    const text = searchParams.get('text') || ''
+    const species = searchParams.get('species')?.split(',') || []
+    const ageValue = searchParams.get('age')
+    const age = Number.isNaN(ageValue) || ageValue == null ? undefined : Number(ageValue)
+    const gender = searchParams.get('gender') || undefined
+    const sortBy = searchParams.get('sortBy') || SortBy.LATEST
+    return {
+      text,
+      species,
+      age,
+      gender,
+      sortBy,
+    }
+  })
+  const [quickActions, setQuickActions] = useState<QuickActionsType>(() => {
+    const action = searchParams.get('actions')
+    if (Object.values(QuickActionsType).includes(action as QuickActionsType)) {
+      return action as QuickActionsType
+    }
+    return QuickActionsType.ALL
+  })
+  const [currentPage, setCurrentPage] = useState(() => {
+    const page = searchParams.get('page')
+    return Number.isNaN(page) ? Number(page) : 1
+  })
 
   const onChange = (filters: FiltersType) => {
     setFilters(filters)
@@ -53,6 +78,26 @@ export const useFilters = () => {
 
   }, [filters, quickActions])
 
+  useEffect(() => {
+    setSearchParams((params) => {
+      params.delete('text')
+      params.delete('species')
+      params.delete('age')
+      params.delete('gender')
+      params.delete('actions')
+      params.delete('sortBy')
+      params.delete('page')
+      if(filters.text) params.set('text', filters.text)
+      if(filters.species.length > 0) params.set('species', filters.species.join(','))
+      if(filters.age != null) params.set('age', filters.age.toString())
+      if(filters.gender != null) params.set('gender', filters.gender)
+      if(quickActions !== QuickActionsType.ALL) params.set('actions', quickActions)
+      if(filters.sortBy !== SortBy.LATEST) params.set('sortBy', filters.sortBy)
+      if(currentPage > 1) params.set('page', currentPage.toString())
+      return params
+    })
+  }, [filters, quickActions, currentPage])
+
   const handleQuickActionsChange = (quickActions: QuickActionsType) => {
     setQuickActions(quickActions)
   }
@@ -60,6 +105,7 @@ export const useFilters = () => {
   const handleReset = () => {
     setFilters(initialState)
     setQuickActions(QuickActionsType.ALL)
+    setCurrentPage(1)
   }
 
   const handlePageChange = (page: number) => {

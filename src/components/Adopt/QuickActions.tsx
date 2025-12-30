@@ -1,11 +1,12 @@
 import { UrgentIcon } from '@/icons/UrgentIcon'
 import { RoundedButton } from '../RoundedButton'
-import { QuickActions as QuickActionsType, SortBy } from '@/types.d'
+import { QuickActions as QuickActionsType, SortBy, type Filters as FiltersType } from '@/types.d'
 interface Props {
   quickActions: QuickActionsType,
+  initialFilters: FiltersType,
   onQuickActionsChange: (quickActions: QuickActionsType) => void
   }
-export const QuickActions = ({ quickActions, onQuickActionsChange }: Props) => {
+export const QuickActions = ({ quickActions, initialFilters, onQuickActionsChange }: Props) => {
   const handleChange = (quickActions: QuickActionsType) => {
     onQuickActionsChange(quickActions)
   }
@@ -19,10 +20,12 @@ export const QuickActions = ({ quickActions, onQuickActionsChange }: Props) => {
         <RoundedButton text='Vaccinated' isActive={quickActions === QuickActionsType.VACCINATED} onClick={() => handleChange(QuickActionsType.VACCINATED)}/>
       </div>
       <p className='flex items-center gap-2 text-nowrap self-start py-1.5'>Sort by <span>
-        <select name="sort" id="sort" className='font-bold focus-visible:outline-none '>
+        <select name="sort" id="sort" className='font-bold focus-visible:outline-none'
+          onChange={() =>{}}
+          value={initialFilters.sortBy}>
           {
             Object.values(SortBy).map((sortBy) => (
-              <option key={sortBy} value={sortBy}>{sortBy}</option>
+              <option key={sortBy} value={sortBy} >{sortBy}</option>
             ))
           }
         </select>

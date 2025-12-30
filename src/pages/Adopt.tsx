@@ -8,6 +8,7 @@ import { RESULTS_PER_PAGE, useFilters } from '@/hooks/useFilters'
 export default function AdoptPage () {
   const {
     pets,
+    filters,
     quickActions,
     currentPage,
     handleChange,
@@ -23,10 +24,10 @@ export default function AdoptPage () {
         <Hero />
         <div className='flex flex-col md:flex-row gap-8 p-8 w-full mx-auto '>
           <aside className='w-full md:w-1/4 2xl:w-1/5'>
-            <Filters onReset={handleReset}/>
+            <Filters onReset={handleReset} initialFilters={filters}/>
           </aside>
           <section className='w-full md:w-3/4 xl:w-4/5'>
-            <QuickActions quickActions={quickActions} onQuickActionsChange={handleQuickActionsChange}/>
+            <QuickActions quickActions={quickActions} initialFilters={filters} onQuickActionsChange={handleQuickActionsChange}/>
             <PetList pets={pets.slice((currentPage - 1) * RESULTS_PER_PAGE, currentPage * RESULTS_PER_PAGE)} />
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
           </section>

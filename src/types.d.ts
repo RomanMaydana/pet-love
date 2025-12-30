@@ -11,11 +11,11 @@ export interface Filters {
   text: string,
 }
 export const initialState: FiltersType = {
+  text: '',
   species: [],
   age: undefined,
   gender: undefined,
   sortBy: SortBy.LATEST,
-  text: '',
 }
 export const PetAges: { [key: number]: number[] } = {
   0: [0, 1],
