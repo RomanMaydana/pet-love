@@ -25,7 +25,7 @@ const navItems = [
 ]
 export const Header = () => {
   return (
-    <header className="flex justify-center items-center py-3 bg-white shadow-sm shadow-green-200/20 px-6">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center py-3 bg-white shadow-sm shadow-green-200/20 px-6">
       <h2 className="flex-1 flex items-center gap-2 text-xl font-bold"><PetLeg className="w-6 h-6 text-green-pet"/>PetLove</h2>
       <nav className="flex gap-3">
         {navItems.map((item) => (

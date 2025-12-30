@@ -18,7 +18,7 @@ export default function AdoptPage () {
   } = useFilters()
 
   return (
-    <main>
+    <main className='mt-14'>
       <form role='search' onChange={handleChange} >
         <Hero />
         <div className='flex flex-col md:flex-row gap-8 p-8 w-full mx-auto '>
