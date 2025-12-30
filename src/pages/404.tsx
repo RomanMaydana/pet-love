@@ -3,7 +3,7 @@ import { Home as HomeIcon } from '@/icons/Home'
 import { SearchIcon } from '@/icons/SearchIcon'
 export default function NotFoundPage () {
   return (
-    <main>
+    <main className='min-h-[calc(100vh-146px)] h-full'>
       <section className='py-10 flex flex-col items-center max-w-2xl  mx-auto'>
         <h1 className="text-3xl font-bold text-green-pet px-3 py-1 rounded-lg border border-gray-100 shadow-sm shadow-gray-200 rotate-12 translate-y-0.5 bg-white">404</h1>
         <h1 className="text-3xl font-bold leading-none">Wow! We have lost</h1>

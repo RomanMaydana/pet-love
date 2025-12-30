@@ -29,7 +29,7 @@ export const Header = () => {
       <h2 className="flex-1 flex items-center gap-2 text-xl font-bold"><PetLeg className="w-6 h-6 text-green-pet"/>PetLove</h2>
       <nav className="flex gap-3">
         {navItems.map((item) => (
-          <NavLink key={item.label} aria-label={item.label} to={item.href} className={({ isActive }) => `text-normal py-2 px-2 rounded-lg hover:scale-110 hover:bg-green-pet/10 transition-all ${isActive ? ' text-green-pet font-bold pointer-events-none' : ''}`}>
+          <NavLink key={item.label} aria-label={item.label} to={item.href} className={({ isActive }) => `text-normal py-2 px-2 rounded-lg hover:scale-110 hover:bg-green-pet/10 transition-all ${isActive ? ' text-green-pet font-semibold pointer-events-none' : ''}`}>
             {item.title}
           </NavLink>
         ))}

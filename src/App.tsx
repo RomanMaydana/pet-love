@@ -4,6 +4,7 @@ import './App.css'
 import HomePage from '@/pages/Home'
 import AdoptPage from '@/pages/Adopt'
 import NotFoundPage from '@/pages/404'
+import { Footer } from '@/components/footer'
 function App () {
 
   return (
@@ -14,6 +15,7 @@ function App () {
         <Route path="/adopt" element={<AdoptPage />} />
         <Route path='*' element={<NotFoundPage />}/>
       </Routes>
+      <Footer />
     </div >
   )
 }
