@@ -1,6 +1,6 @@
 import { PetLeg } from '../icons/PetLeg'
 import { AnchorButton } from './AnchorButton'
-
+import { NavLink } from 'react-router'
 const navItems = [
   {
     label: 'home',
@@ -29,9 +29,9 @@ export const Header = () => {
       <h2 className="flex-1 flex items-center gap-2 text-xl font-bold"><PetLeg className="w-6 h-6 text-green-pet"/>PetLove</h2>
       <nav className="flex gap-3">
         {navItems.map((item) => (
-          <a key={item.label} aria-label={item.label} href={item.href} className="text-normal py-1 px-2 rounded-lg hover:scale-110 hover:bg-green-pet/10 transition-all">
+          <NavLink key={item.label} aria-label={item.label} to={item.href} className={({ isActive }) => `text-normal py-2 px-2 rounded-lg hover:scale-110 hover:bg-green-pet/10 transition-all ${isActive ? ' text-green-pet font-bold pointer-events-none' : ''}`}>
             {item.title}
-          </a>
+          </NavLink>
         ))}
       </nav>
       <div className="flex-1 flex justify-end" >
