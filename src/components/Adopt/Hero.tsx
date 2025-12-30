@@ -2,7 +2,7 @@ import { SearchIcon } from '../../icons/SearchIcon'
 
 export function Hero () {
   return (
-    <section className='relative h-[450px] flex flex-col items-center justify-center gap-10'>
+    <section className='relative h-[450px] flex flex-col items-center justify-center gap-10 z-10'>
       <div className='absolute right-0 left-0 h-full w-full -z-10 mask-t-from-60% mask-t-to-100% bg-black/70'/>
       <img src="./dog.webp" className='absolute right-0-0 left-0 h-full w-full object-cover -z-20' />
       <h1 className='text-6xl font-extrabold text-white text-center text-pretty'>Look for your new best friend</h1>
