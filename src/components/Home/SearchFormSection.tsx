@@ -5,7 +5,7 @@ import { PetLeg } from '@/icons/PetLeg'
 import { SearchIcon } from '@/icons/SearchIcon'
 export const SearchFormSection = () => {
   return (
-    <form className=' max-w-3xl mx-auto flex gap-3 w-full bg-white p-3 rounded-lg border border-lime-400/20 shadow-lg mt-12'>
+    <form className=' max-w-3xl mx-auto flex gap-3 w-full bg-white p-3 rounded-lg border border-lime-400/20 shadow-lg '>
       <InputText placeholder='Search by name, race.' >
         <SearchIcon className='size-5 text-lime-700'/>
       </InputText>

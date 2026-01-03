@@ -2,7 +2,7 @@ import { AnchorButton } from '@/components/AnchorButton'
 
 export function HeroSection () {
   return (
-    <section className='my-8 lg:p-16 max-w-7xl mx-auto flex flex-col md:flex-row gap-8 lg:gap-16 justify-between items-center'>
+    <section className='mt-8 lg:p-16 max-w-7xl mx-auto flex flex-col md:flex-row gap-8 lg:gap-16 justify-between items-center'>
       <article className='flex-1 flex flex-col gap-6'>
         <h1 className='text-4xl lg:text-5xl font-bold text-pretty'>
             Look for your new <span className='text-green-pet'>best friend</span> today
