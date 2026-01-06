@@ -22,6 +22,9 @@
   flex-direction: column;
   min-height: 100vh;
 }
+html{
+  scroll-behavior: smooth;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -31,6 +34,12 @@
 @media (prefers-color-scheme: dark) {
   :root {
     background-color: #000;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    scroll-behavior: auto;
   }
 }
 

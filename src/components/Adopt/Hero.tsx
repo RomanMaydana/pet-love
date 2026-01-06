@@ -1,6 +1,8 @@
 import { SearchIcon } from '../../icons/SearchIcon'
-
-export function Hero () {
+interface Props{
+  defaultText?: string
+}
+export function Hero ({ defaultText }: Props) {
   return (
     <section className='relative h-[450px] flex flex-col items-center justify-center gap-10 z-10'>
       <div className='absolute right-0 left-0 h-full w-full -z-10 mask-t-from-60% mask-t-to-100% bg-black/70'/>
@@ -10,7 +12,8 @@ export function Hero () {
       <section className='max-w-xl w-full mx-auto'>
         <div className='flex items-center gap-2 bg-white p-2 py-3 rounded-lg '>
           <SearchIcon className='mx-2 w-6 h-6 text-lime-600' />
-          <input type="text" name='text' className='flex-1 placeholder:text-neutral-400 focus:outline-none' placeholder='Search by name, race or color' />
+          <input type="text" name='text' className='flex-1 placeholder:text-neutral-400 focus:outline-none'
+            defaultValue={defaultText} placeholder='Search by name, race or color' />
         </div>
       </section>
     </section>

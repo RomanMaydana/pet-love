@@ -21,7 +21,7 @@ export default function AdoptPage () {
   return (
     <main className='mt-14'>
       <form role='search' onChange={handleChange} >
-        <Hero />
+        <Hero defaultText={filters.text}/>
         <div className='flex flex-col md:flex-row gap-8 p-8 w-full mx-auto '>
           <aside className='w-full md:w-1/4 2xl:w-1/5'>
             <Filters onReset={handleReset} initialFilters={filters}/>
