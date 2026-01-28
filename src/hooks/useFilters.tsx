@@ -1,12 +1,15 @@
-import { initialState, type Pet, type Filters as FiltersType, QuickActions as QuickActionsType, SortBy, AgeUnit, PetAges } from '@/types.d'
+import { initialState, type Pet, type Filters as FiltersType, QuickActions as QuickActionsType, SortBy } from '@/types.d'
 import { useSearchForm } from '@/hooks/useSearchForm'
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router'
+import { getAllPets } from '@/services/pets'
 
 export const RESULTS_PER_PAGE = 6
 export const useFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [pets, setPets] = useState<Pet[]>([])
+  const [total, setTotal] = useState(0)
+  const [loading, setLoading] = useState(false)
   const [filters, setFilters] = useState<FiltersType>(() => {
     const text = searchParams.get('text') || ''
     const species = searchParams.get('species')?.split(',') || []
@@ -31,7 +34,7 @@ export const useFilters = () => {
   })
   const [currentPage, setCurrentPage] = useState(() => {
     const page = searchParams.get('page')
-    return Number.isNaN(page) ? Number(page) : 1
+    return Number.isNaN(page) || page == null ? 1 : Number(page)
   })
 
   const onChange = (filters: FiltersType) => {
@@ -39,44 +42,26 @@ export const useFilters = () => {
     setCurrentPage(1)
   }
   const { handleChange } = useSearchForm({ onChange, filters })
-  const totalPages = Math.ceil(pets.length / RESULTS_PER_PAGE)
   useEffect(() => {
     function fetchPets () {
-      fetch('/pets.json')
-        .then(response => response.json())
-        .then((data: Pet[]) => {
-          const filteredPets = data.filter((pet: Pet) => {
-            let result = true
-            if(filters.text.length > 0 && !pet.name.toLowerCase().includes(filters.text.toLowerCase())) {
-              result = false
-            }
-            if (filters.species.length > 0 && !filters.species.includes(pet.species)) {
-              result = false
-            }
-            if (filters.age != null && !((filters.age === 0 && pet.age_unit === AgeUnit.Months) || (pet.age_unit === AgeUnit.Years && PetAges[filters.age][0] < pet.age && pet.age <= PetAges[filters.age][1]))) {
-              result = false
-            }
-            if(filters.gender != null && filters.gender !== pet.gender) {
-              result = false
-            }
-            if(quickActions !== QuickActionsType.ALL && pet.categories[quickActions] === false) {
-              result = false
-            }
-            return result
-          })
-          let sortedPets: Pet[] = []
-          if(filters.sortBy === SortBy.LATEST) {
-            sortedPets = filteredPets.toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-          }
-          if(filters.sortBy === SortBy.OLDEST) {
-            sortedPets = filteredPets.toSorted((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
-          }
-          setPets(sortedPets)
+      setLoading(true)
+      const offset = (currentPage - 1) * RESULTS_PER_PAGE
+      getAllPets({ filters, actions: quickActions, offset, limit: RESULTS_PER_PAGE })
+        .then(response => {
+          setPets(response.data)
+          setTotal(response.total)
+        })
+        .catch(error => {
+          console.error('Error fetching pets:', error)
+          setPets([])
+        })
+        .finally(() => {
+          setLoading(false)
         })
     }
     fetchPets()
 
-  }, [filters, quickActions])
+  }, [filters, quickActions, currentPage])
 
   useEffect(() => {
     setSearchParams((params) => {
@@ -88,7 +73,7 @@ export const useFilters = () => {
       params.delete('sortBy')
       params.delete('page')
       if(filters.text) params.set('text', filters.text)
-      if(filters.species.length > 0) params.set('species', filters.species.join(','))
+      filters.species.forEach(species => params.append('species', species))
       if(filters.age != null) params.set('age', filters.age.toString())
       if(filters.gender != null) params.set('gender', filters.gender)
       if(quickActions !== QuickActionsType.ALL) params.set('actions', quickActions)
@@ -97,9 +82,11 @@ export const useFilters = () => {
       return params
     })
   }, [filters, quickActions, currentPage])
+  const totalPages = Math.ceil(total / RESULTS_PER_PAGE)
 
   const handleQuickActionsChange = (quickActions: QuickActionsType) => {
     setQuickActions(quickActions)
+    setCurrentPage(1)
   }
 
   const handleReset = () => {
@@ -122,5 +109,7 @@ export const useFilters = () => {
     handleReset,
     handlePageChange,
     totalPages,
+    loading,
+    total,
   }
 }

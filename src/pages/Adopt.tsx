@@ -3,7 +3,7 @@ import { PetList } from '@/components/Adopt/PetList'
 import { QuickActions } from '@/components/Adopt/QuickActions'
 import { Filters } from '@/components/Adopt/Filters'
 import { Pagination } from '@/components/Pagination'
-import { RESULTS_PER_PAGE, useFilters } from '@/hooks/useFilters'
+import { useFilters } from '@/hooks/useFilters'
 
 export default function AdoptPage () {
   const {
@@ -16,10 +16,21 @@ export default function AdoptPage () {
     handleReset,
     handlePageChange,
     totalPages,
+    loading,
+    total,
   } = useFilters()
+
+  const title = loading
+    ? 'Loading pets...'
+    : `Results: ${total}, Page ${currentPage} - Pet Love`
 
   return (
     <main className='mt-14'>
+      <title>{title}</title>
+      <meta
+        name='description'
+        content='Explore thousands of pets available for adoption. Filter by species, age, gender, and location to find your perfect companion.'
+      />
       <form role='search' onChange={handleChange} >
         <Hero defaultText={filters.text}/>
         <div className='flex flex-col md:flex-row gap-8 p-8 w-full mx-auto '>
@@ -28,7 +39,9 @@ export default function AdoptPage () {
           </aside>
           <section className='w-full md:w-3/4 xl:w-4/5'>
             <QuickActions quickActions={quickActions} initialFilters={filters} onQuickActionsChange={handleQuickActionsChange}/>
-            <PetList pets={pets.slice((currentPage - 1) * RESULTS_PER_PAGE, currentPage * RESULTS_PER_PAGE)} />
+            {loading && <p className='text-center'>Loading...</p>}
+            {pets.length === 0 && !loading && <p className='text-center'>No pets found</p>}
+            {!loading && <PetList pets={pets} />}
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
           </section>
         </div>

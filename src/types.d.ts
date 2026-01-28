@@ -3,6 +3,13 @@ declare global {
     toSorted (comparator?: (a: T, b: T) => number): T[]
   }
 }
+
+interface PetsResponse {
+  data: Pet[]
+  total: number
+  offset: number
+  limit: number
+}
 export interface Filters {
   species: string[]
   age?: number
